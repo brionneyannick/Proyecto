@@ -1,0 +1,27 @@
+<!-- Header -->
+  <div id="header">
+    <div class="container">
+
+      <!-- Logo -->
+        <div id="logo">
+          <span class="pennant"><span class="ion-android-cart"></span></span>
+          <h1><a href="<%= root_path %>">Proyecteishon</a></h1>
+        </div>
+
+      <!-- Nav -->
+        <nav id="nav">
+          <ul>
+            <li class="active"><a href="<%= root_path %>">Inicio</a></li>
+            <% if user_signed_in? %>
+              <li><a href="<%= new_user_registration_path %>">Cerrar Sesión</a></li>
+
+            <% else %>
+              <li><a href="<%= new_user_registration_path %>">Registrate</a></li>
+              <li><a href="<%= new_user_session_path %>">Inicia Sesión</a></li>
+            <% end %>
+            <li><a href="#">Contáctanos</a></li>
+          </ul>
+        </nav>
+
+    </div>
+  </div>
