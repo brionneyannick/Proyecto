@@ -1,31 +1,113 @@
-<div class="main">
-  <h2>Sign up</h2>
+<div id="main">
+  <section class="container">
+    <h2>Registro de Nuevo Usuario</h2>
+    <div class="row">
+        <section class="4u 12u(mobile)">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= devise_error_messages! %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          </div><br />
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <div class="field">
+            <%= f.label :nombre %><br />
+            <%= f.text_field :name, placeholder: 'Nombre' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :apellido %><br />
+            <%= f.text_field :last_name, placeholder: 'Apellido' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :rut %><br />
+            <%= f.text_field :rut, placeholder: 'Rut' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :gender_id, 'Género' %><br />
+            <%= f.select :gender_id, @genders.pluck(:name, :id).sort, prompt: 'Seleccione...' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :móvil %><br />
+            <%= f.phone_field :phone, placeholder: 'Número de Móvil' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :fecha_de_nacimiento %><br />
+            <%= f.date_field :birth_date %>
+          </div><br />
+        </section>
+        <section class="4u 12u(mobile)">
+
+          <div class="field">
+            <%= f.label :country, 'País' %><br />
+            <%= f.select :country, @countries.pluck(:name, :id), prompt: 'Seleccione...' %>
+          </div><br />
+
+          <div class="field hidden" id="regions_box">
+            <%= f.label :región %><br />
+            <select id="regions"></select>
+          </div><br />
+
+          <div class="field hidden" id="communes_box">
+            <%= f.label :comuna %><br />
+            <select id="communes" name="user[commune_id]"></select>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :dirección %><br />
+            <%= f.text_area :address, placeholder: 'Dirección' %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "off" %>
+          </div><br />
+
+          <div class="field">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div><br />
+
+          <div class="actions">
+            <%= f.submit "Sign up" %>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </section>
+      <section class="4u 12u(mobile)">
+        Completa tus datos para poder comenzar a comprar y vender lo que necesites.
+      </section>
     </div>
-
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Sign up" %>
-    </div>
-  <% end %>
-
-  <%= render "devise/shared/links" %>
+  </section>
 </div>
+
+
+<script>
+  $('#user_country').on('change', function(event){
+    $.ajax({
+      url: '<%= regions_path %>',
+      type: 'get',
+      dataType: 'script',
+      data: {country_id: $(this).val()}
+    })
+  });
+
+  $('#regions').on('change', function(event){
+    $.ajax({
+      url: '<%= communes_path %>',
+      type: 'get',
+      dataType: 'script',
+      data: {region_id: $(this).val()}
+    })
+  });
+
+
+</script>

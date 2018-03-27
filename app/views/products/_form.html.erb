@@ -1,52 +1,71 @@
-<%= form_with(model: product, local: true) do |form| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<div id="main">
+  <section class="container">
+    <h2>Publica tu producto aquí</h2>
+    <div class="row">
+      <section class="4u 12u(mobile)">
+        <%= form_with(model: product, local: true, multipart: true) do |form| %>
+          <% if product.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+              <ul>
+              <% product.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= form.label :category_id %><br>
+            <%= form.select :category_id, @categories.pluck(:name, :id), prompt: 'Seleccione...' %>
+          </div>
+
+          <div class="field">
+            <%= form.label :name %><br>
+            <%= form.text_field :name, id: :product_name %>
+          </div>
+
+          <div class="field">
+            <%= form.label :price %><br>
+            <%= form.text_field :price, id: :product_price %>
+          </div>
+
+          <div class="field">
+            <%= form.label :stock %><br>
+            <%= form.number_field :stock, id: :product_stock %>
+          </div>
+
+          <div class="field">
+            <%= form.label :description %><br>
+            <%= form.text_area :description, id: :product_description %>
+          </div>
+
+      </section>
+      <section class="4u 12u(mobile)" id="photo_section">
+        Ingresa las fotos de tu producto aquí...
+        <div class="field"><br>
+          <%= form.file_field :photo, id: :title %>
+        </div>
+
+        <div class="field"><br>
+          <%= form.file_field :photo, id: :title %>
+        </div>
+
+        <div class="field"><br>
+          <%= form.file_field :photo, id: :title %>
+        </div>
+
+        <div class="field"><br>
+          <%= form.file_field :photo, id: :title %>
+        </div><br>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+
+        <% end %>
+      </section>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :category_id %>
-    <%= form.text_field :category_id, id: :product_category_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :product_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price, id: :product_price %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :product_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :stock %>
-    <%= form.number_field :stock, id: :product_stock %>
-  </div>
-
-  <div class="field">
-    <%= form.label :block %>
-    <%= form.check_box :block, id: :product_block %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :product_description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+  </section>
+</div>

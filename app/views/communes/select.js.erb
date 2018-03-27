@@ -1,0 +1,5 @@
+$('#communes').html("");
+<% @communes.each do |commune| %>
+  $('#communes').append("<option value='<%= commune.id %>'><%= commune.name %></option>");
+<% end %>
+$('#communes_box').removeClass('hidden');

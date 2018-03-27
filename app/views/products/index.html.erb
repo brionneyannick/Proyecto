@@ -11,7 +11,7 @@
 	<div id="featured">
 		<section class="container">
 			<header>
-				<h2>Tu tienda virtual</h2>
+				<h2>Tu tienda en Línea</h2>
 				<span class="byline">Consigue lo que buscas</span>
 			</header>
 		</section>
@@ -22,13 +22,13 @@
 		<section class="container">
 			<div class="row">
 				<% @products.each do |product| %>
-					<section class="4u 12u(mobile)">
-						<a href="#" class="image full"><%= image_tag 'pic01.jpg' %></a>
-						<div class="box">
-							<h3><a href="#"><%= product.name %></a></h3>
-							<h5><a href="#">$<%= product.price %></a></h5>
-						</div>
-					</section>
+						<section class="4u 12u(mobile)">
+							<a href="#" class="image full"><%= image_tag 'pic01.jpg' %></a>
+							<div class="box">
+								<h3><%= link_to product.name, product_path(product.id) %></h3>
+								<h5><a href="#">$<%= product.price %></a></h5>
+							</div>
+						</section>
 				<% end %>
 			</div>
 			<h2>Welcome To Our New Website</h2>

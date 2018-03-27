@@ -4,12 +4,11 @@
     <title>Proyecteichon</title>
     <%= csrf_meta_tags %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
@@ -17,11 +16,22 @@
   <body class="homepage">
     <div id="page-wrapper">
       <%= render 'shared/navbar' %>
+
       <% if notice.present? %>
-        <p class="notice"><%= notice %></p>
+      <div id="main">
+        <section class="container">
+          <div class="row">
+            <p class="notice"><%= notice %></p>
+          </div>
+        </section>
       <% end %>
       <% if alert.present? %>
-        <p class="alert"><%= alert %></p>
+      <div id="main">
+        <section class="container">
+          <div class="row">
+            <p class="alert"><%= alert %></p>
+          </div>
+        </section>
       <% end %>
       <%= yield %>
       <%= render 'shared/footer' %>

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: :index
 
   # GET /products
   # GET /products.json
@@ -15,20 +16,29 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @categories = Category.all
+    @product.photos.build
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all
+    if @product.user_id != current_user.id
+      redirect_to product_path, notice: 'Solo puedes modificar tus productos'
+    end
   end
 
   # POST /products
   # POST /products.json
   def create
+
+    @categories = Category.all
     @product = Product.new(product_params)
+    @product.user_id = current_user.id
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -59,6 +69,10 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def sales
+    @products = Product.where(user_id: current_user.id)
   end
 
   private

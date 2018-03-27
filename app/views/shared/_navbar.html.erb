@@ -11,10 +11,14 @@
       <!-- Nav -->
         <nav id="nav">
           <ul>
-            <li class="active"><a href="<%= root_path %>">Inicio</a></li>
             <% if user_signed_in? %>
-              <li><a href="<%= new_user_registration_path %>">Cerrar Sesión</a></li>
-
+              <li><%= link_to current_user.name, '#' %></li>
+            <% end %>
+            <li><a href="<%= root_path %>">Inicio</a></li>
+            <% if user_signed_in? %>
+              <li><%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>"</li>
+              <li><%= link_to 'Mis Ventas', sales_products_path %></li>
+              <li>Comprar</li>
             <% else %>
               <li><a href="<%= new_user_registration_path %>">Registrate</a></li>
               <li><a href="<%= new_user_session_path %>">Inicia Sesión</a></li>

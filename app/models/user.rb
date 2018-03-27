@@ -7,4 +7,6 @@ class User < ApplicationRecord
   belongs_to :commune
   belongs_to :gender
   has_many :products
+
+  attr_accessor :country, :region
 end

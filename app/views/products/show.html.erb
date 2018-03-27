@@ -1,39 +1,45 @@
-<p id="notice"><%= notice %></p>
+<div id="main">
+  <section class="container">
+    <div class="row">
+      <section class="4u 12u(mobile)">
+        <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Category:</strong>
-  <%= @product.category %>
-</p>
+        <p>
+          <strong>Category:</strong>
+          <%= @product.category.name %>
+        </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+        <p>
+          <strong>Name:</strong>
+          <%= @product.name %>
+        </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price %>
-</p>
+        <p>
+          <strong>Price:</strong>
+          <%= @product.price %>
+        </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @product.user %>
-</p>
+        <p>
+          <strong>Vendedor:</strong>
+          <%= @product.user.name %>
+        </p>
 
-<p>
-  <strong>Stock:</strong>
-  <%= @product.stock %>
-</p>
+        <p>
+          <strong>Stock:</strong>
+          <%= @product.stock %>
+        </p>
 
-<p>
-  <strong>Block:</strong>
-  <%= @product.block %>
-</p>
+        <p>
+          <strong>Description:</strong>
+          <%= @product.description %>
+        </p>
+        <% if @product.user_id == current_user.id %>
+          <%= link_to 'Editar', edit_product_path(@product) %> |
+        <% end %>
+        <%= link_to 'Volver', products_path %> |
+        <%= link_to 'Comprar', '#' %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+      </section>
+    </div>
+  </section>
+</div>
