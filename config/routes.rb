@@ -4,6 +4,9 @@ Rails.application.routes.draw do
     collection do
       get 'sales'
     end
+    member do
+      get 'photos'
+    end
   end
 
   devise_for :users, controllers: {

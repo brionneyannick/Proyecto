@@ -17,7 +17,6 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @categories = Category.all
-    @product.photos.build
   end
 
   # GET /products/1/edit
@@ -36,8 +35,13 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = current_user.id
 
+    @photo = Photo.new(title: params[:product][:photo])
+
+    @product.photos << @photo
+
     respond_to do |format|
       if @product.save
+        # format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
         format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
         format.json { render :show, status: :created, location: @product }
       else
@@ -52,7 +56,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to @product, notice: 'Producto actualizado con éxito.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -66,7 +70,7 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.html { redirect_to sales_products_url, notice: 'Producto eliminado con éxito.' }
       format.json { head :no_content }
     end
   end
