@@ -1,0 +1,14 @@
+    <div class="row">
+      <% @transactions.each do |transaction| %>
+          <section class="4u 12u(mobile)">
+            <a href="#" class="image full"><%= image_tag transaction.product.photos.first.title %></a>
+            <div class="box">
+              <h3 class="white" >Vendedor: <%= transaction.product.user.name %></h3>
+              <h3 class="white" ><%= transaction.product.name %></h3>
+              <h5 class="white" >Precio Unitario: $<%= transaction.product.price %></a></h5>
+              <h5 class="white" >Total: $<%= transaction.total %></a></h5>
+            </div>
+            <%= link_to 'Pagar', '#' %>
+          </section>
+      <% end %>
+    </div>

@@ -14,9 +14,9 @@
 //= require turbolinks
 //= require html5shiv
 //= require respond.min
-//= require jquery.dropotron.min
 //= require jquery.min
-//= require main
 //= require skel.min
+//= require main
+//= require jquery.dropotron.min
 //= require util
 //= require_tree .

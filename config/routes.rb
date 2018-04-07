@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
 
+  get 'transactions/new'
+
   resources :products do
     collection do
+      get 'publications'
+      get 'purchases'
       get 'sales'
     end
     member do
-      get 'photos'
+      get 'comment'
+      resources :transactions, only: [:new, :create]
     end
   end
 

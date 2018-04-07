@@ -1,6 +1,4 @@
-<div id="main">
-  <section class="container">
-    <h2>Publica tu producto aquí</h2>
+  <h2>Publica tu producto aquí</h2>
     <div class="row">
       <section class="4u 12u(mobile)">
         <%= form_with(model: product, local: true, multipart: true) do |form| %>
@@ -39,32 +37,32 @@
           <div class="field">
             <%= form.label :description %><br>
             <%= form.text_area :description, id: :product_description %>
+          </div><br>
+
+          Ingresa las fotos de tu producto aquí...
+
+          <%= form.fields_for :photo do |t| %>
+            <div><br>
+              <%= t.file_field :title, :multiple => true %>
+            </div><br>
+
+            <div>
+              <%= t.file_field :title, :multiple => true %>
+            </div><br>
+
+            <div>
+              <%= t.file_field :title, :multiple => true %>
+            </div><br>
+
+            <div>
+              <%= t.file_field :title, :multiple => true %>
+            </div><br>
+          <% end %>
+
+          <div class="actions">
+            <%= form.submit %>
           </div>
-
-      </section>
-      <section class="4u 12u(mobile)" id="photo_section">
-        Ingresa las fotos de tu producto aquí...
-        <div class="field"><br>
-          <%= form.label :photo %><br>
-          <%= form.file_field :photo, id: :title %>
-        </div>
-
-        <div class="field"><br>
-          <%= form.label :photo %><br>
-          <%= form.file_field :photo, id: :title %>
-        </div>
-
-        <div class="field"><br>
-          <%= form.label :photo %><br>
-          <%= form.file_field :photo, id: :title %>
-        </div>
-
-        <div class="actions">
-          <%= form.submit %>
-        </div>
 
         <% end %>
       </section>
     </div>
-  </section>
-</div>

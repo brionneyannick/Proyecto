@@ -1,18 +1,16 @@
-<div id="main">
-  <section class="container">
     <div class="row">
-      <% @products.each do |product| %>
+      <% @transactions.each do |transaction| %>
+        <% if current_user.products.ids.include?(transaction.product_id) %>
           <section class="4u 12u(mobile)">
-            <a href="#" class="image full"><%= image_tag 'pic01.jpg' %></a>
+            <a href="#" class="image full"><%= image_tag transaction.product.photos.first.title %></a>
             <div class="box">
-              <h3><%= link_to product.name, product_path(product.id) %></h3>
-              <h5><a href="#">$<%= product.price %></a></h5>
+              <h3 class="white" >Comprador: <%= transaction.user.name %></h3>
+              <h3 class="white" ><%= transaction.product.name %></h3>
+              <h5 class="white" >Precio Unitario: $<%= transaction.product.price %></a></h5>
+              <h5 class="white" >Unidades Compradas: <%= transaction.quantity %></a></h5>
+              <h5 class="white" >Total: $<%= transaction.total %></a></h5>
             </div>
-            <%= link_to 'Inactivar', new_product_path %> |
-            <%= link_to 'Eliminar', product_path(product), method: :delete %>
           </section>
+        <% end %>
       <% end %>
-      <%= link_to 'Nuevo Producto', new_product_path %>
     </div>
-  </section>
-</div>

@@ -1,0 +1,33 @@
+<div id="main">
+  <section class="container">
+    <h2>Confirma tu Compra</h2>
+    <div class="row">
+      <section class="4u 12u(mobile)">
+
+        <p><%= @product.name %></p>
+
+        <%= form_with(model: @transaction, local: true) do |form| %>
+
+          <div class="field">
+            <%= form.label :pay_id, 'Método de Pago' %><br>
+            <%= form.select :pay_id, @pays.pluck(:name, :id), prompt: 'Seleccione...' %>
+          </div><br>
+
+          <div class="field">
+            <label for="">Cantidad</label><br>
+            <select class="" name="quantity">
+              <% for x in 1..@product.stock %>
+                <option value="<%= x %>"><%= x %></option>
+              <% end %>
+            </select>
+          </div><br>
+
+          <div class="actions">
+            <%= form.submit 'Aceptar' %>
+          </div>
+
+        <% end %>
+      </section>
+    </div>
+  </section>
+</div>

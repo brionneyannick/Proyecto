@@ -1,31 +1,35 @@
-<!-- Header -->
-  <div id="header">
-    <div class="container">
-
       <!-- Logo -->
         <div id="logo">
           <span class="pennant"><span class="ion-android-cart"></span></span>
-          <h1><a href="<%= root_path %>">Proyecteishon</a></h1>
+          <h1><a href="#">Proyecteishon</a></h1>
         </div>
 
       <!-- Nav -->
         <nav id="nav">
           <ul>
+            <li><%= link_to 'Home', root_path %></li>
             <% if user_signed_in? %>
-              <li><%= link_to current_user.name, '#' %></li>
-            <% end %>
-            <li><a href="<%= root_path %>">Inicio</a></li>
-            <% if user_signed_in? %>
-              <li><%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %>"</li>
-              <li><%= link_to 'Mis Ventas', sales_products_path %></li>
-              <li>Comprar</li>
+              <li><%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete %></li>
+              <li>
+                <a href="#" class="icon fa-caret-down"><%= current_user.name %></a>
+                <ul>
+                  <li><%= link_to 'Mis Publicaciones', publications_products_path %></li>
+                  <li><%= link_to 'Mis Compras', purchases_products_path %></li>
+                  <li><%= link_to 'Mis Ventas', sales_products_path %></li>
+                  <li>
+                    <a href="#">Mis Datos</a>
+                    <ul>
+                      <li><a href="#">Example Menu</a></li>
+                      <li><a href="#">Example Menu</a></li>
+                      <li><a href="#">Example Menu</a></li>
+                      <li><a href="#">Example Menu</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
             <% else %>
-              <li><a href="<%= new_user_registration_path %>">Registrate</a></li>
-              <li><a href="<%= new_user_session_path %>">Inicia Sesión</a></li>
+              <li><%= link_to 'Iniciar Sesión', new_user_session_path %></li>
+              <li><%= link_to 'Regístrate', new_user_registration_path %></li>
             <% end %>
-            <li><a href="#">Contáctanos</a></li>
           </ul>
         </nav>
-
-    </div>
-  </div>

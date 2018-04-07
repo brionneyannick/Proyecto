@@ -15,26 +15,52 @@
 
   <body class="homepage">
     <div id="page-wrapper">
-      <%= render 'shared/navbar' %>
+      <div id="header">
+        <div class="container">
+          <%= render 'shared/navbar' %>
+        </div>
+      </div>
 
+      <!-- Alerts -->
       <% if notice.present? %>
-      <div id="main">
-        <section class="container">
-          <div class="row">
-            <p class="notice"><%= notice %></p>
-          </div>
-        </section>
+        <p class="notice alerts"><%= notice %></p>
       <% end %>
       <% if alert.present? %>
+        <p class="alert alerts"><%= alert %></p>
+      <% end %>
+
+      <% if  controller.controller_name == 'products' and controller.action_name == 'index' %>
+        <!-- Banner -->
+        <div id="banner">
+          <div class="container">
+            <section>
+              <a class="image full"><%= image_tag 'banner.jpg' %></a>
+            </section>
+          </div>
+        </div>
+
+        <!-- Featured -->
+        <div id="featured">
+          <section class="container">
+            <header>
+              <h2>Tu tienda en Línea</h2>
+              <span class="byline">Consigue lo que buscas</span>
+            </header>
+          </section>
+        </div>
+
+      <% end %>
+
       <div id="main">
         <section class="container">
-          <div class="row">
-            <p class="alert"><%= alert %></p>
-          </div>
+          <%= yield %>
         </section>
-      <% end %>
-      <%= yield %>
-      <%= render 'shared/footer' %>
+      </div>
+      <div id="footer">
+        <div class="container">
+          <%= render 'shared/footer' %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

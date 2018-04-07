@@ -1,38 +1,21 @@
-<!-- Banner -->
-	<div id="banner">
-		<div class="container">
-			<section>
-				<a class="image full"><%= image_tag 'banner.jpg' %></a>
-			</section>
-		</div>
-	</div>
-
-<!-- Featured -->
-	<div id="featured">
-		<section class="container">
-			<header>
-				<h2>Tu tienda en Línea</h2>
-				<span class="byline">Consigue lo que buscas</span>
-			</header>
-		</section>
-	</div>
-
 <!-- Main -->
-	<div id="main">
-		<section class="container">
-			<div class="row">
-				<% @products.each do |product| %>
-						<section class="4u 12u(mobile)">
-							<a href="#" class="image full"><%= image_tag 'pic01.jpg' %></a>
-							<div class="box">
-								<h3><%= link_to product.name, product_path(product.id) %></h3>
-								<h5><a href="#">$<%= product.price %></a></h5>
-							</div>
-						</section>
+<div id="main">
+	<section class="container">
+		<div class="row">
+			<% @products.each do |product| %>
+				<% if product.stock > 0 %>
+					<section class="4u 12u(mobile)">
+						<a href="#" class="image full"><%= image_tag product.photos.first.title %></a>
+						<div class="box">
+							<h3><%= link_to product.name, product_path(product.id) %></h3>
+							<h5 class="white"><a href="#">$ <%= product.price %></a></h5>
+						</div>
+					</section>
 				<% end %>
-			</div>
-			<h2>Welcome To Our New Website</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet egestas eros. Sed venenatis est nunc, id convallis tellus venenatis non. Proin id nisi euismod, molestie nisl vel, accumsan sem. Integer felis sem, lacinia eu auctor eget, dapibus feugiat elit. Duis lectus justo, ultrices ac placerat non, sollicitudin at massa. Integer pulvinar ipsum a posuere consectetur. Aenean placerat, quam sed varius congue, felis lectus ullamcorper massa, nec posuere ante massa finibus tortor. Nulla facilisi. Maecenas porttitor felis et tempor vulputate. Fusce ligula ante, venenatis hendrerit semper at, posuere vel velit. Pellentesque commodo nulla vel nisi fringilla, id malesuada sapien dictum. Morbi eget lobortis nulla. Suspendisse id aliquet felis.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet egestas eros. Sed venenatis est nunc, id convallis tellus venenatis non. Proin id nisi euismod, molestie nisl vel, accumsan sem. Integer felis sem, lacinia eu auctor eget, dapibus feugiat elit. Duis lectus justo, ultrices ac placerat non, sollicitudin at massa. Integer pulvinar ipsum a posuere consectetur. Aenean placerat, quam sed varius congue, felis lectus ullamcorper massa, nec posuere ante massa finibus tortor. Nulla facilisi. Maecenas porttitor felis et tempor vulputate. Fusce ligula ante, venenatis hendrerit semper at, posuere vel velit. Pellentesque commodo nulla vel nisi fringilla, id malesuada sapien dictum. Morbi eget lobortis nulla. Suspendisse id aliquet felis.</p>
-		</section>
-	</div>
+			<% end %>
+		</div>
+		<h2>Welcome To Our New Website</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet egestas eros. Sed venenatis est nunc, id convallis tellus venenatis non. Proin id nisi euismod, molestie nisl vel, accumsan sem. Integer felis sem, lacinia eu auctor eget, dapibus feugiat elit. Duis lectus justo, ultrices ac placerat non, sollicitudin at massa. Integer pulvinar ipsum a posuere consectetur. Aenean placerat, quam sed varius congue, felis lectus ullamcorper massa, nec posuere ante massa finibus tortor. Nulla facilisi. Maecenas porttitor felis et tempor vulputate. Fusce ligula ante, venenatis hendrerit semper at, posuere vel velit. Pellentesque commodo nulla vel nisi fringilla, id malesuada sapien dictum. Morbi eget lobortis nulla. Suspendisse id aliquet felis.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet egestas eros. Sed venenatis est nunc, id convallis tellus venenatis non. Proin id nisi euismod, molestie nisl vel, accumsan sem. Integer felis sem, lacinia eu auctor eget, dapibus feugiat elit. Duis lectus justo, ultrices ac placerat non, sollicitudin at massa. Integer pulvinar ipsum a posuere consectetur. Aenean placerat, quam sed varius congue, felis lectus ullamcorper massa, nec posuere ante massa finibus tortor. Nulla facilisi. Maecenas porttitor felis et tempor vulputate. Fusce ligula ante, venenatis hendrerit semper at, posuere vel velit. Pellentesque commodo nulla vel nisi fringilla, id malesuada sapien dictum. Morbi eget lobortis nulla. Suspendisse id aliquet felis.</p>
+	</section>
+</div>

@@ -1,8 +1,6 @@
-<div id="main">
-  <section class="container">
     <div class="row">
       <section class="4u 12u(mobile)">
-        <p id="notice"><%= notice %></p>
+
 
         <p>
           <strong>Category:</strong>
@@ -37,9 +35,14 @@
           <%= link_to 'Editar', edit_product_path(@product) %> |
         <% end %>
         <%= link_to 'Volver', products_path %> |
-        <%= link_to 'Comprar', '#' %>
+        <% if @product.user_id != current_user.id %>
+          <%= link_to 'Realizar una pregunta', comment_product_path %>  |
+          <%= link_to 'Comprar', new_transaction_path %>  |
+        <% end %>
+        <% if @product.user_id == current_user.id %>
+          <%= link_to 'Nueva Venta', new_product_path %>
+        <% end %>
 
       </section>
     </div>
-  </section>
-</div>
+  

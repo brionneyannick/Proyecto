@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 9.99
+  quantity: 1
+  payed: false
+  user: one
+  product: one
+  reference: 
+
+two:
+  total: 9.99
+  quantity: 1
+  payed: false
+  user: two
+  product: two
+  reference: 

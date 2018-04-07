@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :comment]
   before_action :authenticate_user!, except: :index
 
   # GET /products
@@ -35,12 +35,11 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.user_id = current_user.id
 
-    @photo = Photo.new(title: params[:product][:photo])
-
-    @product.photos << @photo
-
     respond_to do |format|
       if @product.save
+        params[:product][:photo][:title].each do |img|
+          @photo = @product.photos.create!(:title => img)
+        end
         # format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
         format.html { redirect_to @product, notice: 'Producto creado exitosamente.' }
         format.json { render :show, status: :created, location: @product }
@@ -75,8 +74,19 @@ class ProductsController < ApplicationController
     end
   end
 
-  def sales
+  def publications
     @products = Product.where(user_id: current_user.id)
+  end
+
+  def purchases
+    @transactions = Transaction.where(user_id: current_user.id)
+  end
+
+  def sales
+    @transactions = Transaction.all
+  end
+
+  def comment
   end
 
   private
@@ -87,6 +97,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:category_id, :name, :price, :user_id, :stock, :block, :description)
+      params.require(:product).permit(:category_id, :name, :price, :user_id, :stock, :block, :description, photo_title: [:image])
     end
 end
