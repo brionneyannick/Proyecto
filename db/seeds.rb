@@ -114,3 +114,5 @@ xii = ['Antártica', 'Cabo de Hornos', 'Laguna Blanca', 'Punta Arenas', 'Río Ve
 xii.each do |x|
   Commune.create(name: x, region_id: r_xii_id)
 end
+
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

@@ -4,4 +4,5 @@ class Product < ApplicationRecord
   has_many :photos, dependent: :destroy
   accepts_nested_attributes_for :photos
   has_many :transactions
+  has_many :comments
 end

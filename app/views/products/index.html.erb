@@ -3,7 +3,7 @@
 	<section class="container">
 		<div class="row">
 			<% @products.each do |product| %>
-				<% if product.stock > 0 %>
+				<% if product.stock > 0 and !product.block %>
 					<section class="4u 12u(mobile)">
 						<a href="#" class="image full"><%= image_tag product.photos.first.title %></a>
 						<div class="box">
