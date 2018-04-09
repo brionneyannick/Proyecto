@@ -115,4 +115,4 @@
 #   Commune.create(name: x, region_id: r_xii_id)
 # end
 
-AdminUser.create!(email: 'admin@example.com', password: '321654987', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: '321654987', password_confirmation: 'password')
