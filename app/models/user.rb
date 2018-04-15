@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   belongs_to :commune
   belongs_to :gender
-  has_many :products
-  has_many :transactions
+  has_many :products, dependent: :destroy
+  has_many :transactions, dependent: :destroy
 
-  attr_accessor :country, :region
+  attr_accessor :country_id, :region
 end

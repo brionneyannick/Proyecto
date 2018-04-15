@@ -1,43 +1,117 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+  <div class="row">
+    <div class="4u 12u(mobile)">
+      <div class="field">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div><br>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="field">
+        <%= f.label :nombre %><br />
+        <%= f.text_field :name, placeholder: 'Nombre' %>
+      </div><br />
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <div class="field">
+        <%= f.label :apellido %><br />
+        <%= f.text_field :last_name, placeholder: 'Apellido' %>
+      </div><br />
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+      <div class="field">
+        <%= f.label :rut %><br />
+        <%= f.text_field :rut, placeholder: 'Rut' %>
+      </div><br />
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+      <div class="field">
+        <%= f.label :gender_id, 'Género' %><br />
+        <%= f.select :gender_id, @genders.pluck(:name, :id).sort, prompt: 'Seleccione...' %>
+      </div><br />
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
+      <div class="field">
+        <%= f.label :móvil %><br />
+        <%= f.phone_field :phone, placeholder: 'Número de Móvil' %>
+      </div><br />
 
-  <div class="actions">
-    <%= f.submit "Update" %>
+      <div class="field">
+        <%= f.label :fecha_de_nacimiento %><br />
+        <%= f.date_field :birth_date %>
+      </div><br />
+    </div>
+
+    <div class="4u 12u(mobile)">
+      <div class="field">
+        <%= f.label :country_id, 'País' %><br />
+        <%= f.select :country_id, @countries.pluck(:name, :id), prompt: 'Seleccione...' %>
+      </div><br />
+
+      <div class="field hidden" id="regions_box">
+        <%= f.label :región %><br />
+        <select id="regions"></select>
+      </div><br />
+
+      <div class="field hidden" id="communes_box">
+        <%= f.label :comuna %><br />
+        <select id="communes" name="user[commune_id]"></select>
+      </div><br />
+
+      <div class="field">
+        <%= f.label :dirección %><br />
+        <%= f.text_area :address, placeholder: 'Dirección' %>
+      </div><br />
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password %> <i>(déjalo en blanco si no deseas cambiarlo)</i><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password %> <i>(necesitamos tu clave actual para confirmar tus cambios)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Actualizar" %>
+      </div>
+
+      <h3>Cancel my account</h3>
+
+      <p>Unhappy? <%= button_to "Eliminar mi Cuenta", registration_path(resource_name), data: { confirm: "Estás seguro?" }, method: :delete %></p>
+
+      <%= link_to "Back", :back %>
+    </div>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<script>
+  $('#user_country_id').on('change', function(event){
+    $.ajax({
+      url: '<%= regions_path %>',
+      type: 'get',
+      dataType: 'script',
+      data: {country_id: $(this).val()}
+    })
+  });
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+  $('#regions').on('change', function(event){
+    $.ajax({
+      url: '<%= communes_path %>',
+      type: 'get',
+      dataType: 'script',
+      data: {region_id: $(this).val()}
+    })
+  });
+</script>
